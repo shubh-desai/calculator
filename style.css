@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+button {
+    height: 64px;
+    width: 64px;
+    border: black solid 2px;
+    border-radius: 4px;
+}
+
+.main-container {
+    width: 300px;
+    margin: auto;
+    margin-top: 100px;
+    border: black solid 2px;
+    border-radius: 12px;
+    background-color: #aaa;
+}
+
+#display {
+    width: 276px;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 4px;
+}
+
+#display,
+.row-1,
+.row-2,
+.row-3,
+.row-4,
+.row-5 {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 12px;
+}
+
+#zero {
+    width: 140px;
+}
+
+#clear {
+    background-color: #faa;
+}
+
+#backspace {
+    background-color: #aaf;
+}
