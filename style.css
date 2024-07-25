@@ -11,14 +11,16 @@
     background-color: #aaa;
 }
 
-#display {
+#display-upper,
+#display-lower {
     width: 276px;
     background-color: white;
     border: black solid 2px;
     border-radius: 4px;
 }
 
-#display,
+#display-upper,
+#display-lower,
 .row-1,
 .row-2,
 .row-3,

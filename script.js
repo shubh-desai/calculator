@@ -1,4 +1,8 @@
-const display = document.getElementById("display");
+const displayLower = document.getElementById("display-lower");
+displayLower.style.fontSize = "40px";
+
+const displayUpper = document.getElementById("display-upper");
+displayUpper.style.fontSize = "20px";
 
 const clear = document.getElementById("clear");
 const backspace = document.getElementById("backspace");
@@ -54,6 +58,8 @@ function operate(new_operator) {
 
             operator = new_operator;
             operatorAdded = true;
+
+            displayUpper.textContent = Number(operand1) + " " + operator;
         }
     } else {
 
@@ -62,6 +68,8 @@ function operate(new_operator) {
             if (new_operator !== "=") {
 
                 operator = new_operator;
+
+                displayUpper.textContent = Number(operand1) + " " + operator;
             }
         } else {
 
@@ -76,17 +84,24 @@ function operate(new_operator) {
                 case "-":
                     answer = number1 - number2;
                     break;
-                case "*":
+                case "x":
                     answer = number1 * number2;
                     break;
                 case "/":
-                    answer = number1 / number2;
+                    if (number2 === 0) {
+
+                        alert("Division with 0 is not legal! Enter a number except 0.")
+                        return;
+                    } else {
+
+                        answer = number1 / number2;
+                    }
+                    
                     break;
         
-                // ? and = left to handle
+                // ? left to handle
         
-                // case "?":
-                //     answer = number1 + number2;
+                // case "?":                
                 //     break;
                 // default:
                 //     break;
@@ -99,11 +114,20 @@ function operate(new_operator) {
             operand1 = answer.toString();
             operand2 = "";
             operatorAdded = false;
+            operator = "";
 
             if (new_operator !== "=") {
 
                 operator = new_operator;
                 operatorAdded = true;
+            }
+
+            displayLower.textContent = answer;
+            displayUpper.textContent = Number(operand1);
+
+            if (operatorAdded) {
+
+                displayUpper.textContent = Number(operand1) + " " + operator;
             }
         }
     }
@@ -147,11 +171,14 @@ function appendOperand(event) {
     }
 
     if (operatorAdded) {
-
+        
         operand2 += number;
+        displayLower.textContent = Number(operand2);
+        displayUpper.textContent = Number(operand1) + " " + operator;
     } else {
-
+        
         operand1 += number;
+        displayLower.textContent = Number(operand1);
     }
 }
 
@@ -167,7 +194,7 @@ function appendOperator(event) {
             new_operaor = "-";
             break;
         case "multiply":
-            new_operaor = "*";
+            new_operaor = "x";
             break;
         case "divide":
             new_operaor = "/";
@@ -181,17 +208,4 @@ function appendOperator(event) {
     }
 
     operate(new_operaor);
-
-    // if (operand1 !== "") {
-
-    //     if (operator !== "=") {
-
-    //         operatorAdded = true;
-    //     }
-    // }
-
-    // if (operand1 !== "" && operand2 !== "") {
-
-    //     operate (operator);
-    // }
 }
