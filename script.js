@@ -27,22 +27,23 @@ const zero = document.getElementById("zero");
 
 const point = document.getElementById("point");
 
-let operand1 = "";
+let operand1 = "0";
 let operand2 = "";
 let operator = "";
 let operatorAdded = false;
+displayLower.textContent = operand1;
 
 clear.addEventListener("click", reset);
 
 function reset () {
 
-    operand1 = "";
+    operand1 = "0";
     operand2 = "";
     operator = "";
     operatorAdded = false;
 
-    displayLower.textContent = "Display";
-    displayUpper.textContent = "Display";
+    displayLower.textContent = operand1;
+    displayUpper.textContent = "";
 }
 
 backspace.addEventListener("click", del);
@@ -52,11 +53,50 @@ function del () {
     if (operatorAdded) {
 
         operand2 = operand2.substring(0, operand2.length - 1);
-        displayLower.textContent = Number(operand2);
+
+        if (operand2 === "") {
+
+            operand2 = "0";
+        }
+
+        displayLower.textContent = operand2;
     } else {
 
         operand1 = operand1.substring(0, operand1.length - 1);
-        displayLower.textContent = Number(operand1);
+
+        if (operand1 === "") {
+
+            operand1 = "0";
+        }
+
+        displayLower.textContent = operand1;
+    }
+}
+
+point.addEventListener("click", addDecimalPoint);
+
+function addDecimalPoint() {
+
+    if (operatorAdded) {
+
+        if (operand2 === "")
+            operand2 = "0.";
+        else if (!operand2.includes(".")) {
+
+            operand2 += ".";
+        }
+
+        displayLower.textContent = operand2;
+    } else {
+        
+        if (operand1 === "")
+            operand1 = "0.";
+        if (!operand1.includes(".")) {
+
+            operand1 += ".";
+        }
+
+        displayLower.textContent = operand1;
     }
 }
 
@@ -87,7 +127,7 @@ function operate(new_operator) {
             operator = new_operator;
             operatorAdded = true;
 
-            displayUpper.textContent = Number(operand1) + " " + operator;
+            displayUpper.textContent = operand1 + " " + operator;
         }
     } else {
 
@@ -97,7 +137,7 @@ function operate(new_operator) {
 
                 operator = new_operator;
 
-                displayUpper.textContent = Number(operand1) + " " + operator;
+                displayUpper.textContent = operand1 + " " + operator;
             }
         } else {
 
@@ -137,7 +177,7 @@ function operate(new_operator) {
 
             if (new_operator === "=") {
 
-                displayUpper.textContent = Number(operand1) + " " + operator +  " " + Number(operand2) + " =";
+                displayUpper.textContent = operand1 + " " + operator +  " " + operand2 + " =";
             }
 
             operand1 = answer.toString();
@@ -155,7 +195,7 @@ function operate(new_operator) {
 
             if (operatorAdded) {
 
-                displayUpper.textContent = Number(operand1) + " " + operator;
+                displayUpper.textContent = operand1 + " " + operator;
             }
         }
     }
@@ -199,14 +239,30 @@ function appendOperand(event) {
     }
 
     if (operatorAdded) {
+
+        if (operand2 === "0") {
+
+            if (number !== 0)
+                operand2 = number.toString();
+        } else {
+
+            operand2 += number;
+        }
         
-        operand2 += number;
-        displayLower.textContent = Number(operand2);
-        displayUpper.textContent = Number(operand1) + " " + operator;
+        displayLower.textContent = operand2;
+        displayUpper.textContent = operand1 + " " + operator;
     } else {
+
+        if (operand1 === "0") {
+
+            if (number !== 0)
+                operand1 = number.toString();
+        } else {
+
+            operand1 += number;
+        }
         
-        operand1 += number;
-        displayLower.textContent = Number(operand1);
+        displayLower.textContent = operand1;
     }
 }
 
