@@ -5,7 +5,7 @@
 .main-container {
     width: 300px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 36px;
     border: black solid 2px;
     border-radius: 12px;
     background-color: #aaa;
@@ -13,11 +13,13 @@
 
 #display-upper,
 #display-lower {
-    width: 276px;
+    width: 272px;
     background-color: white;
     border: black solid 2px;
     border-radius: 4px;
     min-height: 48px;
+
+    word-break: break-word;    
 }
 
 #display-upper,
@@ -28,9 +30,14 @@
 .row-4,
 .row-5 {
     display: flex;
-    justify-content: center;
     gap: 12px;
     margin: 12px;
+}
+
+#display-upper,
+#display-lower {
+    justify-content: end;
+    padding: 12px;
 }
 
 #zero {

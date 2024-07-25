@@ -146,7 +146,7 @@ function operate(new_operator) {
 
     if (!operatorAdded) {
 
-        if (new_operator !== "=") {
+        if (new_operator !== "\u003D") {
 
             operator = new_operator;
             operatorAdded = true;
@@ -170,16 +170,16 @@ function operate(new_operator) {
             let answer;
         
             switch (operator) {
-                case "+":
+                case "\u002B":
                     answer = number1 + number2;
                     break;
-                case "-":
+                case "\u2212":
                     answer = number1 - number2;
                     break;
-                case "x":
+                case "\u00D7":
                     answer = number1 * number2;
                     break;
-                case "/":
+                case "\u00F7":
                     if (number2 === 0) {
 
                         alert("Division with 0 is not legal! Enter a number except 0.")
@@ -194,7 +194,7 @@ function operate(new_operator) {
 
             if (new_operator === "=") {
 
-                displayUpper.textContent = operand1 + " " + operator +  " " + operand2 + " =";
+                displayUpper.textContent = operand1 + " " + operator +  " " + operand2 + " \u003D";
             }
 
             operand1 = answer.toString();
@@ -289,22 +289,22 @@ function appendOperator(event) {
 
     switch (event.target.id) {
         case "add":
-            new_operaor = "+";
+            new_operaor = "\u002B";
             break;
         case "subtract":
-            new_operaor = "-";
+            new_operaor = "\u2212";
             break;
         case "multiply":
-            new_operaor = "x";
+            new_operaor = "\u00D7";
             break;
         case "divide":
-            new_operaor = "/";
+            new_operaor = "\u00F7";
             break;
         case "negate":
             new_operaor = "?";
             break;
         case "equal":
-            new_operaor = "=";
+            new_operaor = "\u003D";
             break;
     }
 
