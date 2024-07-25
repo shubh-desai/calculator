@@ -6,20 +6,27 @@
     width: 300px;
     margin: auto;
     margin-top: 36px;
+    
     border: black solid 2px;
     border-radius: 12px;
+    
     background-color: #aaa;
 }
 
-#display-upper,
-#display-lower {
-    width: 272px;
-    background-color: white;
+.btn {
+    height: 64px;
+    width: 64px;
+    
     border: black solid 2px;
     border-radius: 4px;
-    min-height: 48px;
+    
+    cursor: pointer;
+    
+    background-color: #eee;
+}
 
-    word-break: break-word;    
+.btn:hover {
+    background-color: #ddd;
 }
 
 #display-upper,
@@ -36,25 +43,22 @@
 
 #display-upper,
 #display-lower {
-    justify-content: end;
+    min-height: 48px;
     padding: 12px;
+    width: 272px;
+
+    justify-content: end;
+    
+    background-color: white;
+    
+    border: black solid 2px;
+    border-radius: 4px;
+
+    word-break: break-word;    
 }
 
 #zero {
     width: 140px;
-}
-
-.btn {
-    height: 64px;
-    width: 64px;
-    border: black solid 2px;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #eee;
-}
-
-.btn:hover {
-    background-color: #ddd;
 }
 
 .btn:active {

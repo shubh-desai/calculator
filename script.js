@@ -1,3 +1,5 @@
+// Initialization
+
 const displayLower = document.getElementById("display-lower");
 displayLower.style.fontSize = "40px";
 
@@ -31,74 +33,10 @@ let operand1 = "0";
 let operand2 = "";
 let operator = "";
 let operatorAdded = false;
+
 displayLower.textContent = operand1;
 
-clear.addEventListener("click", reset);
-
-function reset () {
-
-    operand1 = "0";
-    operand2 = "";
-    operator = "";
-    operatorAdded = false;
-
-    displayLower.textContent = operand1;
-    displayUpper.textContent = "";
-}
-
-backspace.addEventListener("click", del);
-
-function del () {
-
-    if (operatorAdded) {
-
-        operand2 = operand2.substring(0, operand2.length - 1);
-
-        if (operand2 === "") {
-
-            operand2 = "0";
-        }
-
-        displayLower.textContent = operand2;
-    } else {
-
-        operand1 = operand1.substring(0, operand1.length - 1);
-
-        if (operand1 === "") {
-
-            operand1 = "0";
-        }
-
-        displayLower.textContent = operand1;
-    }
-}
-
-point.addEventListener("click", addDecimalPoint);
-
-function addDecimalPoint() {
-
-    if (operatorAdded) {
-
-        if (operand2 === "")
-            operand2 = "0.";
-        else if (!operand2.includes(".")) {
-
-            operand2 += ".";
-        }
-
-        displayLower.textContent = operand2;
-    } else {
-        
-        if (operand1 === "")
-            operand1 = "0.";
-        if (!operand1.includes(".")) {
-
-            operand1 += ".";
-        }
-
-        displayLower.textContent = operand1;
-    }
-}
+// Attaching event listeners
 
 one.addEventListener("click", appendOperand);
 two.addEventListener("click", appendOperand);
@@ -111,12 +49,112 @@ eight.addEventListener("click", appendOperand);
 nine.addEventListener("click", appendOperand);
 zero.addEventListener("click", appendOperand);
 
+point.addEventListener("click", addDecimalPoint);
+
 add.addEventListener("click", appendOperator);
 subtract.addEventListener("click", appendOperator);
 multiply.addEventListener("click", appendOperator);
 divide.addEventListener("click", appendOperator);
 negate.addEventListener("click", appendOperator);
 equal.addEventListener("click", appendOperator);
+
+clear.addEventListener("click", reset);
+backspace.addEventListener("click", del);
+
+// functions
+
+function appendOperand(event) {
+
+    let number;
+
+    switch (event.target.id) {
+        case "one":
+            number = 1;
+            break;
+        case "two":
+            number = 2;
+            break;
+        case "three":
+            number = 3;
+            break;
+        case "four":
+            number = 4;
+            break;
+        case "five":
+            number = 5;
+            break;
+        case "six":
+            number = 6;
+            break;
+        case "seven":
+            number = 7;
+            break;
+        case "eight":
+            number = 8;
+            break;
+        case "nine":
+            number = 9;
+            break;
+        case "zero":
+            number = 0;
+            break;
+    }
+
+    if (operatorAdded) {
+
+        if (operand2 === "0") {
+
+            if (number !== 0)
+                operand2 = number.toString();
+        } else {
+
+            operand2 += number;
+        }
+        
+        displayLower.textContent = operand2;
+        displayUpper.textContent = operand1 + " " + operator;
+    } else {
+
+        if (operand1 === "0") {
+
+            if (number !== 0)
+                operand1 = number.toString();
+        } else {
+
+            operand1 += number;
+        }
+        
+        displayLower.textContent = operand1;
+    }
+}
+
+function appendOperator(event) {
+
+    let new_operaor;
+
+    switch (event.target.id) {
+        case "add":
+            new_operaor = "\u002B";
+            break;
+        case "subtract":
+            new_operaor = "\u2212";
+            break;
+        case "multiply":
+            new_operaor = "\u00D7";
+            break;
+        case "divide":
+            new_operaor = "\u00F7";
+            break;
+        case "negate":
+            new_operaor = "?";
+            break;
+        case "equal":
+            new_operaor = "\u003D";
+            break;
+    }
+
+    operate(new_operaor);
+}
 
 function operate(new_operator) {
 
@@ -218,95 +256,63 @@ function operate(new_operator) {
     }
 }
 
-function appendOperand(event) {
-
-    let number;
-
-    switch (event.target.id) {
-        case "one":
-            number = 1;
-            break;
-        case "two":
-            number = 2;
-            break;
-        case "three":
-            number = 3;
-            break;
-        case "four":
-            number = 4;
-            break;
-        case "five":
-            number = 5;
-            break;
-        case "six":
-            number = 6;
-            break;
-        case "seven":
-            number = 7;
-            break;
-        case "eight":
-            number = 8;
-            break;
-        case "nine":
-            number = 9;
-            break;
-        case "zero":
-            number = 0;
-            break;
-    }
+function addDecimalPoint() {
 
     if (operatorAdded) {
 
-        if (operand2 === "0") {
+        if (operand2 === "")
+            operand2 = "0.";
+        else if (!operand2.includes(".")) {
 
-            if (number !== 0)
-                operand2 = number.toString();
-        } else {
-
-            operand2 += number;
+            operand2 += ".";
         }
-        
+
         displayLower.textContent = operand2;
-        displayUpper.textContent = operand1 + " " + operator;
     } else {
-
-        if (operand1 === "0") {
-
-            if (number !== 0)
-                operand1 = number.toString();
-        } else {
-
-            operand1 += number;
-        }
         
+        if (operand1 === "")
+            operand1 = "0.";
+        if (!operand1.includes(".")) {
+
+            operand1 += ".";
+        }
+
         displayLower.textContent = operand1;
     }
 }
 
-function appendOperator(event) {
+function reset () {
 
-    let new_operaor;
+    operand1 = "0";
+    operand2 = "";
+    operator = "";
+    operatorAdded = false;
 
-    switch (event.target.id) {
-        case "add":
-            new_operaor = "\u002B";
-            break;
-        case "subtract":
-            new_operaor = "\u2212";
-            break;
-        case "multiply":
-            new_operaor = "\u00D7";
-            break;
-        case "divide":
-            new_operaor = "\u00F7";
-            break;
-        case "negate":
-            new_operaor = "?";
-            break;
-        case "equal":
-            new_operaor = "\u003D";
-            break;
+    displayLower.textContent = operand1;
+    displayUpper.textContent = "";
+}
+
+function del () {
+
+    if (operatorAdded) {
+
+        operand2 = operand2.substring(0, operand2.length - 1);
+
+        if (operand2 === "") {
+
+            operand2 = "0";
+        }
+
+        displayLower.textContent = operand2;
+    } else {
+
+        operand1 = operand1.substring(0, operand1.length - 1);
+
+        if (operand1 === "") {
+
+            operand1 = "0";
+        }
+
+        displayLower.textContent = operand1;
     }
-
-    operate(new_operaor);
 }
