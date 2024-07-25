@@ -23,7 +23,7 @@ const zero = document.getElementById("zero");
 
 const point = document.getElementById("point");
 
-let operand1 = "0";
+let operand1 = "";
 let operand2 = "";
 let operator = "";
 let operatorAdded = false;
@@ -45,6 +45,69 @@ multiply.addEventListener("click", appendOperator);
 divide.addEventListener("click", appendOperator);
 negate.addEventListener("click", appendOperator);
 equal.addEventListener("click", appendOperator);
+
+function operate(new_operator) {
+
+    if (!operatorAdded) {
+
+        if (new_operator !== "=") {
+
+            operator = new_operator;
+            operatorAdded = true;
+        }
+    } else {
+
+        if (operand2 === "") {
+
+            if (new_operator !== "=") {
+
+                operator = new_operator;
+            }
+        } else {
+
+            let number1 = Number (operand1);
+            let number2 = Number (operand2);
+            let answer;
+        
+            switch (operator) {
+                case "+":
+                    answer = number1 + number2;
+                    break;
+                case "-":
+                    answer = number1 - number2;
+                    break;
+                case "*":
+                    answer = number1 * number2;
+                    break;
+                case "/":
+                    answer = number1 / number2;
+                    break;
+        
+                // ? and = left to handle
+        
+                // case "?":
+                //     answer = number1 + number2;
+                //     break;
+                // default:
+                //     break;
+            }
+
+            console.log(number1);
+            console.log(number2);
+            console.log(answer);
+
+            operand1 = answer.toString();
+            operand2 = "";
+            operatorAdded = false;
+
+            if (new_operator !== "=") {
+
+                operator = new_operator;
+                operatorAdded = true;
+            }
+        }
+    }
+}
 
 function appendOperand(event) {
 
@@ -83,35 +146,52 @@ function appendOperand(event) {
             break;
     }
 
-    // console.log(event.target.id);
-    // console.log(number);
+    if (operatorAdded) {
+
+        operand2 += number;
+    } else {
+
+        operand1 += number;
+    }
 }
 
 function appendOperator(event) {
 
-    let curr_operator;
+    let new_operaor;
 
     switch (event.target.id) {
         case "add":
-            curr_operator = "+";
+            new_operaor = "+";
             break;
         case "subtract":
-            curr_operator = "-";
+            new_operaor = "-";
             break;
         case "multiply":
-            curr_operator = "*";
+            new_operaor = "*";
             break;
         case "divide":
-            curr_operator = "/";
+            new_operaor = "/";
             break;
         case "negate":
-            curr_operator = "?";
+            new_operaor = "?";
             break;
         case "equal":
-            curr_operator = "=";
+            new_operaor = "=";
             break;
     }
 
-    // console.log(event.target.id);
-    // console.log(curr_operator);
+    operate(new_operaor);
+
+    // if (operand1 !== "") {
+
+    //     if (operator !== "=") {
+
+    //         operatorAdded = true;
+    //     }
+    // }
+
+    // if (operand1 !== "" && operand2 !== "") {
+
+    //     operate (operator);
+    // }
 }
