@@ -2,13 +2,6 @@
     box-sizing: border-box;
 }
 
-button {
-    height: 64px;
-    width: 64px;
-    border: black solid 2px;
-    border-radius: 4px;
-}
-
 .main-container {
     width: 300px;
     margin: auto;
@@ -41,10 +34,43 @@ button {
     width: 140px;
 }
 
+.btn {
+    height: 64px;
+    width: 64px;
+    border: black solid 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.btn:hover {
+    background-color: #ddd;
+}
+
+.btn:active {
+    background-color: #ccc;
+}
+
 #clear {
     background-color: #faa;
 }
 
 #backspace {
     background-color: #aaf;
+}
+
+#clear:hover {
+    background-color: #e99;
+}
+
+#backspace:hover {
+    background-color: #99e;
+}
+
+#clear:active {
+    background-color: #d88;
+}
+
+#backspace:active {
+    background-color: #88d;
 }
