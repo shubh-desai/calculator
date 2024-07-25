@@ -32,6 +32,34 @@ let operand2 = "";
 let operator = "";
 let operatorAdded = false;
 
+clear.addEventListener("click", reset);
+
+function reset () {
+
+    operand1 = "";
+    operand2 = "";
+    operator = "";
+    operatorAdded = false;
+
+    displayLower.textContent = "Display";
+    displayUpper.textContent = "Display";
+}
+
+backspace.addEventListener("click", del);
+
+function del () {
+
+    if (operatorAdded) {
+
+        operand2 = operand2.substring(0, operand2.length - 1);
+        displayLower.textContent = Number(operand2);
+    } else {
+
+        operand1 = operand1.substring(0, operand1.length - 1);
+        displayLower.textContent = Number(operand1);
+    }
+}
+
 one.addEventListener("click", appendOperand);
 two.addEventListener("click", appendOperand);
 three.addEventListener("click", appendOperand);
@@ -107,9 +135,10 @@ function operate(new_operator) {
                 //     break;
             }
 
-            console.log(number1);
-            console.log(number2);
-            console.log(answer);
+            if (new_operator === "=") {
+
+                displayUpper.textContent = Number(operand1) + " " + operator +  " " + Number(operand2) + " =";
+            }
 
             operand1 = answer.toString();
             operand2 = "";
@@ -123,7 +152,6 @@ function operate(new_operator) {
             }
 
             displayLower.textContent = answer;
-            displayUpper.textContent = Number(operand1);
 
             if (operatorAdded) {
 
