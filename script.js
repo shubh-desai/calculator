@@ -120,6 +120,30 @@ equal.addEventListener("click", appendOperator);
 
 function operate(new_operator) {
 
+    if (new_operator === "?") {
+
+        if (!operatorAdded) {
+
+            let temp = Number(operand1);
+            temp = -temp;
+            operand1 = temp.toString();
+
+            displayLower.textContent = operand1;
+        } else {
+
+            if (operand2 !== "") {
+
+                let temp = Number(operand2);
+                temp = -temp;
+                operand2 = temp.toString();
+            }
+
+            displayLower.textContent = operand2;
+        }
+
+        return;
+    }
+
     if (!operatorAdded) {
 
         if (new_operator !== "=") {
@@ -166,13 +190,6 @@ function operate(new_operator) {
                     }
                     
                     break;
-        
-                // ? left to handle
-        
-                // case "?":                
-                //     break;
-                // default:
-                //     break;
             }
 
             if (new_operator === "=") {
